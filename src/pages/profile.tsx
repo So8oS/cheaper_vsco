@@ -7,13 +7,14 @@ import { UploadButton, UploadDropzone } from "../components/uploadthing";
 import { toast } from "react-toastify";
 import { mutate } from "swr";
 import { IoIosClose } from "react-icons/io";
+import { useSession } from "next-auth/react";
 
 const Profile = () => {
   const user = useCurrentUser();
   const [uploadUrl, setUploadUrl] = useState("");
   const [showUpload, setShowUpload] = useState(false);
   const notify = () => toast("Upload Successful!");
-
+  const { data: session } = useSession();
   const handleBeforeUploadBegin = (files: File[]) => {
     // Show a confirmation dialog here or any custom logic
     const userConfirmed = window.confirm("Do you want to upload the selected image?");
@@ -49,6 +50,7 @@ const Profile = () => {
 
   return (
     <div className="flex flex-col justify-center items-center ">
+      <h1>{session?.user?.email}</h1>
       <div className="mt-10 flex flex-col justify-center items-center gap-4 ">
         <img src={user?.data?.image} alt="pp" className="rounded-full w-30 flex items-center justify-center " />
         <div className="flex flex-col justify-center items-center">
