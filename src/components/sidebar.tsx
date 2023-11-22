@@ -18,8 +18,8 @@ const Sidebar = () => {
         </Link>
       </div>
       {/* middle */}
-      <div className=" flex flex-col  gap-3 font-semibold cursor-pointer">
-        <div className="flex gap-2  items-center  ">
+      <div className=" flex flex-col  gap-3 font-semibold ">
+        <div className="flex gap-2  items-center cursor-pointer   ">
           <IoEarthOutline className="w-6 h-6" />
           <span>Explore</span>
         </div>
@@ -31,10 +31,10 @@ const Sidebar = () => {
       </div>
 
       {/* bottom */}
-      <div className=" flex flex-col  gap-3 font-semibold cursor-pointer  ">
+      <div className=" flex flex-col  gap-3 font-semibold   ">
         {session && (
           <div
-            className="flex gap-2  items-center  "
+            className="flex gap-2  items-center cursor-pointer   "
             onClick={() => {
               signOut({
                 callbackUrl: "/",
