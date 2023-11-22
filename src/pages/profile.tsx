@@ -62,8 +62,6 @@ const Profile = () => {
     axios.post("/api/uploadPic", { uploadUrl, userId: user.data.id });
   };
 
-  if
-
   return (
     <div className="flex flex-col justify-center items-center ">
       <div className="mt-10 flex flex-col justify-center items-center gap-4 ">
