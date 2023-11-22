@@ -5,26 +5,8 @@ import useCurrentUser from "../../lib/useCurrentUser";
 import axios from "axios";
 import { UploadButton, UploadDropzone } from "../components/uploadthing";
 import { toast } from "react-toastify";
-import { getSession } from "next-auth/react";
-import { NextPageContext } from "next";
 import { mutate } from "swr";
 import { IoIosClose } from "react-icons/io";
-
-// export async function getServerSideProps(context: NextPageContext) {
-//   const session = await getSession(context);
-
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//       },
-//     };
-//   }
-
-//   return {
-//     props: {},
-//   };
-// }
 
 const Profile = () => {
   const user = useCurrentUser();
