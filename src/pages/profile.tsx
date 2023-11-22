@@ -12,15 +12,14 @@ import { IoIosClose } from "react-icons/io";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
-
   if (!session) {
     return {
       redirect: {
         destination: "/",
+        permanent: false,
       },
     };
   }
-
   return {
     props: {},
   };
