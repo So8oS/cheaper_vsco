@@ -9,7 +9,6 @@ import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
 import { mutate } from "swr";
 import { IoIosClose } from "react-icons/io";
-import { u } from "uploadthing/dist/types-caf29eb6";
 
 export async function getServerSideProps(context: NextPageContext) {
   const session = await getSession(context);
@@ -18,6 +17,7 @@ export async function getServerSideProps(context: NextPageContext) {
     return {
       redirect: {
         destination: "/",
+        shallow: true,
       },
     };
   }
