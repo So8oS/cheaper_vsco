@@ -10,21 +10,21 @@ import { NextPageContext } from "next";
 import { mutate } from "swr";
 import { IoIosClose } from "react-icons/io";
 
-export async function getServerSideProps(context: NextPageContext) {
-  const session = await getSession(context);
+// export async function getServerSideProps(context: NextPageContext) {
+//   const session = await getSession(context);
 
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/",
-      },
-    };
-  }
+//   if (!session) {
+//     return {
+//       redirect: {
+//         destination: "/",
+//       },
+//     };
+//   }
 
-  return {
-    props: {},
-  };
-}
+//   return {
+//     props: {},
+//   };
+// }
 
 const Profile = () => {
   const user = useCurrentUser();
@@ -118,7 +118,7 @@ const Profile = () => {
       {/* Content */}
       <div className="columns-1 md:columns-3 lg:columns-4 lg:columns-5ry px-2 mt-10 ">
         {/*   @ts-ignore */}
-        {user?.data?.pics.map((item, index) => <img key={index} className=" w-80 p-2 mb-2  " src={item.url} />).reverse()}
+        {user && user?.data?.pics.map((item, index) => <img key={index} className=" w-80 p-2 mb-2  " src={item.url} />).reverse()}
       </div>
     </div>
   );
