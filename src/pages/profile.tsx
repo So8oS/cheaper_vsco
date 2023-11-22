@@ -5,37 +5,32 @@ import useCurrentUser from "../../lib/useCurrentUser";
 import axios from "axios";
 import { UploadButton, UploadDropzone } from "../components/uploadthing";
 import { toast } from "react-toastify";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 import { NextPageContext } from "next";
 import { mutate } from "swr";
 import { IoIosClose } from "react-icons/io";
-import { redirect } from "next/dist/server/api-utils";
-import { useRouter } from "next/router";
 
-// export async function getServerSideProps(context: NextPageContext) {
-//   const session = await getSession(context);
-//   if (!session) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
-//   return {
-//     props: {
-//       session,
-//     },
-//   };
-// }
+export async function getServerSideProps(context: NextPageContext) {
+  const session = await getSession(context);
+
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/",
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
+}
 
 const Profile = () => {
   const user = useCurrentUser();
   const [uploadUrl, setUploadUrl] = useState("");
   const [showUpload, setShowUpload] = useState(false);
   const notify = () => toast("Upload Successful!");
-  const { data: session } = useSession();
-  const router = useRouter();
 
   const handleBeforeUploadBegin = (files: File[]) => {
     // Show a confirmation dialog here or any custom logic
@@ -66,11 +61,9 @@ const Profile = () => {
     axios.post("/api/uploadPic", { uploadUrl, userId: user.data.id });
   };
 
-  if (!session) {
-    router.push("/");
+  if (!user) {
+    return <div>loading</div>;
   }
-
-  if (!user) return <div>loading</div>;
 
   return (
     <div className="flex flex-col justify-center items-center ">
