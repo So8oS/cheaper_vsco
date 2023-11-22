@@ -24,7 +24,7 @@ const Sidebar = () => {
           <span>Explore</span>
         </div>
 
-        <Link href={"/profile"} className="flex gap-2  items-center cursor-pointer  ">
+        <Link href="/profile" className="flex gap-2  items-center cursor-pointer  ">
           <CgProfile className="w-6 h-6" />
           <span>Profile</span>
         </Link>
