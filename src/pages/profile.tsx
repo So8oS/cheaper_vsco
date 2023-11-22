@@ -21,7 +21,9 @@ export async function getServerSideProps(context: NextPageContext) {
     };
   }
   return {
-    props: {},
+    props: {
+      session,
+    },
   };
 }
 
@@ -59,6 +61,8 @@ const Profile = () => {
   const uploadpic = () => {
     axios.post("/api/uploadPic", { uploadUrl, userId: user.data.id });
   };
+
+  if
 
   return (
     <div className="flex flex-col justify-center items-center ">
