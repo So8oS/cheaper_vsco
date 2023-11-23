@@ -7,16 +7,14 @@ import { SessionProvider } from "next-auth/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <div className="flex justify-between">
-      <SessionProvider session={pageProps.session}>
+    <SessionProvider session={pageProps.session}>
+      <div className="flex lg:flex-row flex-col  min-h-screen lg:justify-between">
         <Sidebar />
-        <div className="w-full mt-10 mb-10">
-          <div className="flex flex-col justify-center items-center">
-            <Component {...pageProps} />
-          </div>
+        <div className="flex flex-col justify-center items-center py-10 ">
+          <Component {...pageProps} />
         </div>
         <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
-      </SessionProvider>
-    </div>
+      </div>
+    </SessionProvider>
   );
 }

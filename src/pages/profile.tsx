@@ -44,13 +44,17 @@ const Profile = () => {
     axios.post("/api/uploadPic", { uploadUrl, userId: user.data.id });
   };
 
-  if (!user) {
-    return <div>loading</div>;
+  if (!user.data) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <span className="loader"></span>
+      </div>
+    );
   }
 
   return (
-    <div className="flex flex-col justify-center items-center ">
-      <h1>{session?.user?.email}</h1>
+    <div className="flex flex-col justify-center items-center max-w-7xl ">
+      {/* <h1>{session?.user?.email}</h1> */}
       <div className="mt-10 flex flex-col justify-center items-center gap-4 ">
         <img src={user?.data?.image} alt="pp" className="rounded-full w-30 flex items-center justify-center " />
         <div className="flex flex-col justify-center items-center">
