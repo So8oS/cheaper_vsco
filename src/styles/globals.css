@@ -42,3 +42,7 @@
     transform: rotate(360deg) translate(30px);
   }
 }
+
+::-webkit-scrollbar {
+  display: none;
+}

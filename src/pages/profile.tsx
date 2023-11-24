@@ -30,7 +30,7 @@ const Profile = () => {
 
   const handleClientUploadComplete = async (res: any) => {
     setUploadUrl(res[0].url);
-    console.log(uploadUrl);
+    console.log(res);
     uploadpic();
     notify();
     mutate("/api/user");

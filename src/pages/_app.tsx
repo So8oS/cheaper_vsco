@@ -10,7 +10,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <SessionProvider session={pageProps.session}>
       <div className="flex lg:flex-row flex-col  min-h-screen lg:justify-between">
         <Sidebar />
-        <div className="flex flex-col justify-center items-center py-10 ">
+        <div className="flex flex-col  items-center py-10 ">
           <Component {...pageProps} />
         </div>
         <ToastContainer position="top-center" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover theme="dark" />
