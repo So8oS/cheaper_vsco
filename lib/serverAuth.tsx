@@ -33,8 +33,7 @@ const serverAuth = async (req: NextApiRequest) => {
     });
 
     return { currentUser };
-  } catch (error) {
-    //@ts-ignore
+  } catch (error: any) {
     console.error("Error in serverAuth:", error.message);
     throw error; // rethrow the error to pass it to the client
   }

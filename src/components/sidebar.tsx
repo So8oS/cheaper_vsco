@@ -10,7 +10,7 @@ import { useSession } from "next-auth/react";
 
 const Sidebar = () => {
   const { data: session } = useSession();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   return (
     <div
       className=" flex  border border-black bg-black p-3 lg:px-4 lg:py-6 text-[#737373] 
@@ -19,6 +19,7 @@ const Sidebar = () => {
       lg:sticky lg:left-0 lg:top-0
       justify-between
       lg:justify-start
+      lg:overflow-scroll
 
     "
     >
@@ -36,6 +37,7 @@ const Sidebar = () => {
       >
         --
       </h1>
+
       <div
         className={` ${open && "hidden "}   lg:flex lg:flex-col h-full gap-4 lg:gap-0 lg:items-center  lg:mt-10
         ${!open && "flex flex-col absolute lg:relative top-14 h-fit left-0 p-4 lg:p-0 lg:h-full lg:left-0 lg:top-0 bg-black w-full   "}
@@ -43,17 +45,17 @@ const Sidebar = () => {
       >
         {/* middle */}
         <div className=" flex flex-col  gap-3 font-semibold ">
-          <div className="flex gap-2  items-center cursor-pointer   ">
+          <Link href={"/"} className="flex gap-2  items-center cursor-pointer   ">
             <IoEarthOutline className="w-6 h-6" />
             <span>Explore</span>
-          </div>
+          </Link>
           <Link href="/profile" shallow={true} className="flex gap-2  items-center cursor-pointer  ">
             <CgProfile className="w-6 h-6" />
             <span>Profile</span>
           </Link>
         </div>
         {/* bottom */}
-        <div className=" flex flex-col lg:mt-[40rem]   gap-3 font-semibold   ">
+        <div className=" flex flex-col lg:pt-[33rem]   gap-3 font-semibold   ">
           {session && (
             <div
               className="flex gap-2  items-center cursor-pointer   "
@@ -70,10 +72,6 @@ const Sidebar = () => {
           <div className="flex gap-2  items-center cursor-pointer   ">
             <BsSearch className="w-6 h-6" />
             <span>Search</span>
-          </div>
-          <div className="flex gap-2  items-center cursor-pointer   ">
-            <MdOutlineSettings className="w-6 h-6" />
-            <span>Account</span>
           </div>
         </div>
       </div>

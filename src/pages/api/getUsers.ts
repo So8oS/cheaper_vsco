@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from "next";
-
 import prismadb from "../../../lib/prismadb";
-import { u } from "uploadthing/dist/types-caf29eb6";
 
 const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const users = await prismadb.user.findMany({
       select: {
+        id: true,
         name: true,
         image: true,
         pics: {
@@ -21,13 +20,9 @@ const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
     });
 
     return res.status(200).json(users);
-  } catch (error) {
-    //@ts-ignore
-
+  } catch (error: any) {
     console.error("Error in serverAuth:", error.message);
-    //@ts-ignore
-
-    return { error: error.message };
+    return res.status(500).json({ error: error.message });
   }
 };
 
