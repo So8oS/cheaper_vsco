@@ -106,6 +106,7 @@ const Profile = () => {
           <div className="flex gap-1 ">
             <UploadButton
               endpoint="imageUploader"
+              //@ts-ignore
               onClientUploadComplete={async (res) => {
                 console.log(res[0].url);
                 setNewImage(res[0].url);
