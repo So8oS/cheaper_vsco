@@ -21,14 +21,12 @@ interface FormData {
 
 const Profile = () => {
   const user = useCurrentUser();
-  const [uploadUrl, setUploadUrl] = useState<string>("");
   const [isHovered, setIsHovered] = useState<boolean>(false);
   const [showUpload, setShowUpload] = useState<boolean>(false);
   const [newImage, setNewImage] = useState<string>("");
   const [ppUpload, setPpUpload] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const notify = () => toast("Upload Successful!");
-  console.log(user);
 
   const {
     register,
@@ -51,8 +49,7 @@ const Profile = () => {
 
   const handleClientUploadComplete = async (res: ImageData[]) => {
     console.log(res[0].url);
-    setUploadUrl(res[0].url);
-    await uploadpic();
+    await uploadpic(res[0].url);
     setShowUpload(false);
     await mutate("/api/user");
   };
@@ -61,13 +58,13 @@ const Profile = () => {
     alert(`ERROR! ${error.message}`);
   };
 
-  const uploadpic = async () => {
-    await axios.post("/api/uploadPic", { uploadUrl, userId: user.data.id });
+  const uploadpic = async (url) => {
+    await axios.post("/api/uploadPic", { uploadUrl: url, userId: user.data.id });
     notify();
   };
 
-  const updateProfilePic = async () => {
-    await axios.post("/api/imageUpdate", { newImage, userId: user.data.id });
+  const updateProfilePic = async (imageThing) => {
+    await axios.post("/api/imageUpdate", { newImage: imageThing, userId: user.data.id });
   };
 
   const updateInfo = async (data: FormData) => {
@@ -110,8 +107,7 @@ const Profile = () => {
               //@ts-ignore
               onClientUploadComplete={async (res) => {
                 console.log(res[0].url);
-                setNewImage(res[0].url);
-                updateProfilePic();
+                updateProfilePic(res[0].url);
                 setPpUpload(false);
                 mutate("/api/user");
               }}
