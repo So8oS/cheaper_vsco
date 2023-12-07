@@ -25,7 +25,8 @@ const Profile = () => {
   const [showUpload, setShowUpload] = useState<boolean>(false);
   const [ppUpload, setPpUpload] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  const notify = () => toast("Upload Successful!");
+  const UploadNotify = () => toast("Upload Successful!");
+  const ppUpdateNotify = () => toast("Profile Picture Updated!");
 
   const {
     register,
@@ -55,7 +56,7 @@ const Profile = () => {
 
   const uploadpic = async (url: string) => {
     await axios.post("/api/uploadPic", { uploadUrl: url, userId: user.data.id });
-    notify();
+    UploadNotify();
   };
 
   const updateProfilePic = async (newPic: string) => {
@@ -85,7 +86,11 @@ const Profile = () => {
     <div className="flex flex-col">
       <div className="mt-10 flex flex-col justify-center items-center gap-4">
         <div className="relative flex items-center" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-          <img src={user?.data?.image} alt="pp" className="rounded-full w-32 flex items-center justify-center" />
+          {user?.data?.image ? (
+            <img src={user?.data?.image} alt="pp" className="rounded-full w-32 flex items-center justify-center" />
+          ) : (
+            <img src="/user.png" alt="pp" className="rounded-full w-32 flex items-center justify-center" />
+          )}
           {isHovered && (
             <MdOutlineEdit
               className="absolute inset-0 m-auto text-white cursor-pointer"

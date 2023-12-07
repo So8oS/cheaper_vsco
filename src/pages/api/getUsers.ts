@@ -8,6 +8,7 @@ const getUsers = async (req: NextApiRequest, res: NextApiResponse) => {
         id: true,
         name: true,
         image: true,
+        email: true,
         pics: {
           select: {
             id: true,
