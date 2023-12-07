@@ -3,7 +3,6 @@ import prismadb from "../../../lib/prismadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { userId, newImage } = req.body;
-  console.log(newImage, userId);
   if (!userId || !newImage) {
     return res.status(400).json({ error: "Bad Request" });
   }
