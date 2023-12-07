@@ -28,6 +28,7 @@ const Profile = () => {
   const [ppUpload, setPpUpload] = useState<boolean>(false);
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const notify = () => toast("Upload Successful!");
+  console.log(user);
 
   const {
     register,
@@ -49,24 +50,24 @@ const Profile = () => {
   };
 
   const handleClientUploadComplete = async (res: ImageData[]) => {
-    setUploadUrl(res[0].url);
     console.log(res[0].url);
-    uploadpic();
+    setUploadUrl(res[0].url);
+    await uploadpic();
     setShowUpload(false);
-    mutate("/api/user");
+    await mutate("/api/user");
   };
 
   const handleUploadError = (error: Error) => {
     alert(`ERROR! ${error.message}`);
   };
 
-  const uploadpic = () => {
-    axios.post("/api/uploadPic", { uploadUrl, userId: user.data.id });
+  const uploadpic = async () => {
+    await axios.post("/api/uploadPic", { uploadUrl, userId: user.data.id });
     notify();
   };
 
-  const updateProfilePic = () => {
-    axios.post("/api/imageUpdate", { newImage, userId: user.data.id });
+  const updateProfilePic = async () => {
+    await axios.post("/api/imageUpdate", { newImage, userId: user.data.id });
   };
 
   const updateInfo = async (data: FormData) => {
