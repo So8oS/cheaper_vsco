@@ -2,7 +2,6 @@ import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { IoEarthOutline } from "react-icons/io5";
 import { BsSearch } from "react-icons/bs";
-import { MdOutlineSettings } from "react-icons/md";
 import Link from "next/link";
 import { FaSignOutAlt } from "react-icons/fa";
 import { signOut } from "next-auth/react";
@@ -45,11 +44,24 @@ const Sidebar = () => {
       >
         {/* middle */}
         <div className=" flex flex-col  gap-3 font-semibold ">
-          <Link href={"/"} className="flex gap-2  items-center cursor-pointer   ">
+          <Link
+            onClick={() => {
+              setOpen(!open);
+            }}
+            href={"/"}
+            className="flex gap-2  items-center cursor-pointer   "
+          >
             <IoEarthOutline className="w-6 h-6" />
             <span>Explore</span>
           </Link>
-          <Link href="/profile" shallow={true} className="flex gap-2  items-center cursor-pointer  ">
+          <Link
+            onClick={() => {
+              setOpen(!open);
+            }}
+            href="/profile"
+            shallow={true}
+            className="flex gap-2  items-center cursor-pointer  "
+          >
             <CgProfile className="w-6 h-6" />
             <span>Profile</span>
           </Link>
@@ -69,10 +81,16 @@ const Sidebar = () => {
               <span>Logout</span>
             </div>
           )}
-          <div className="flex gap-2  items-center cursor-pointer   ">
+          <Link
+            onClick={() => {
+              setOpen(!open);
+            }}
+            href={"/search"}
+            className="flex gap-2  items-center cursor-pointer   "
+          >
             <BsSearch className="w-6 h-6" />
             <span>Search</span>
-          </div>
+          </Link>
         </div>
       </div>
       {/* </div> */}
