@@ -34,7 +34,6 @@ const serverAuth = async (req: NextApiRequest, res: NextApiResponse) => {
         },
       },
     });
-    console.log(currentUser);
     return currentUser;
   } catch (error: any) {
     console.error("Error in serverAuth:", error.message);
