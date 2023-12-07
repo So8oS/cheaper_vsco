@@ -7,19 +7,16 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 const serverAuth = async (req: NextApiRequest, res: NextApiResponse) => {
   try {
-    // const session = await getSession({ req });
     //@ts-ignore
-    const session2 = await getServerSession(req, res, authOptions);
-    // console.log({ session });
-    console.log({ session2 });
+    const session = await getServerSession(req, res, authOptions);
 
-    if (!session2?.user?.email) {
+    if (!session?.user?.email) {
       throw new Error("Not Signed In");
     }
 
     const currentUser = await prismadb.user.findUnique({
       where: {
-        email: session2.user.email,
+        email: session.user.email,
       },
       select: {
         id: true,
