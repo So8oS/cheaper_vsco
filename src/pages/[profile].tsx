@@ -37,10 +37,12 @@ const Profile = () => {
     get();
   }, [id]);
 
-  if (!user) return;
-  <div>
-    <p>loading...</p>
-  </div>;
+  if (!user)
+    return (
+      <div className="flex flex-col justify-center items-center min-h-screen">
+        <span className="loader"></span>
+      </div>
+    );
 
   return (
     <div className="flex flex-col">
