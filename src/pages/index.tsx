@@ -23,6 +23,7 @@ export default function Home() {
   const { data: session } = useSession();
   const [selectedPhoto, setSelectedPhoto] = useState<ImageData>();
   const [viewPhoto, setViewPhoto] = useState<boolean>(false);
+  const [sliceCount, setSliceCount] = useState<number>(2);
   return (
     <div className="flex flex-col justify-center items-center p-2">
       <h1 className="text-5xl font-bold">CVSCO</h1>
@@ -82,7 +83,17 @@ export default function Home() {
             );
           })
           .reverse()
-          .slice(0, 5)
+          .slice(0, sliceCount)
+      )}
+      {sliceCount < users.data?.length && (
+        <button
+          onClick={() => {
+            setSliceCount(sliceCount + 5);
+          }}
+          className="bg-slate-300 rounded-md p-2 mt-4"
+        >
+          Load more
+        </button>
       )}
     </div>
   );
