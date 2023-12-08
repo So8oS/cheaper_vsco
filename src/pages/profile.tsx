@@ -10,6 +10,7 @@ import { IoIosClose } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
 import { useForm } from "react-hook-form";
 import { IoIosCloseCircle } from "react-icons/io";
+import { MdDelete } from "react-icons/md";
 
 interface ImageData {
   url: string;
@@ -28,6 +29,7 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const UploadNotify = () => toast("Upload Successful!");
   const ppUpdateNotify = () => toast("Profile Picture Updated!");
+  const picturedeleteNotify = () => toast("Picture Deleted!");
   const [selectedPhoto, setSelectedPhoto] = useState();
   const [viewPhoto, setViewPhoto] = useState<boolean>(false);
 
@@ -85,6 +87,7 @@ const Profile = () => {
     if (userConfirmed) {
       await axios.post("/api/deletePic", { picId: id });
       await mutate("/api/user");
+      picturedeleteNotify();
     } else {
       return;
     }
@@ -201,18 +204,17 @@ const Profile = () => {
         <div className="bg-slate-300 rounded  fixed  m-auto top-0 bottom-0 right-0 left-0 flex flex-col justify-center items-center  border border-black ">
           {/* @ts-ignore */}
           <img src={selectedPhoto.url} className="w-auto p-1  max-h-[85%] " />
-          <div className="flex flex-col justify-center items-center gap-2 w-full  bg-slate-100">
-            <button
+          <div className="flex justify-center items-center gap-2 w-full  ">
+            <MdDelete
               onClick={() => {
                 /* @ts-ignore */
 
                 handleDelete(selectedPhoto.id);
                 setViewPhoto(false);
               }}
-              className="bg-red-600 rounded text-white px-2 py-1 mt-5"
-            >
-              Delete
-            </button>
+              className=" cursor-pointer h-6 w-6  "
+            />
+
             <IoIosCloseCircle
               onClick={() => {
                 setViewPhoto(false);
