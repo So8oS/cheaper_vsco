@@ -85,7 +85,7 @@ const Profile = () => {
                   setViewPhoto(true);
                 }}
                 key={index}
-                className="w-80 p-2 mb-2 rounded-sm"
+                className="w-80 p-2 mb-2 rounded-sm cursor-pointer"
                 src={item.url}
               />
             ))
