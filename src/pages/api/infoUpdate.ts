@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import prismadb from "../../../lib/prismadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { userId, newName, newBio } = req.body;
