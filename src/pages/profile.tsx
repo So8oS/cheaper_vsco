@@ -152,7 +152,7 @@ const Profile = () => {
         {!isEditing && (
           <div className="flex flex-col justify-center items-center">
             <h1 className="font-bold">{user?.data?.name}</h1>
-            <h1 className="text-[#737373]">{user?.data?.bio}</h1>
+            {user?.data?.bio ? <h1 className="text-[#737373]">{user?.data?.bio}</h1> : <h1 className="text-[#737373]">Add bio</h1>}
             <MdOutlineEdit onClick={handleEdit} />
           </div>
         )}
