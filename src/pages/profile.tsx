@@ -14,11 +14,20 @@ import { MdDelete } from "react-icons/md";
 
 interface ImageData {
   url: string;
+  id: string;
+  createdAt: string;
 }
 
 interface FormData {
   newName: string;
   newBio: string;
+}
+
+interface UserProfile {
+  image: string;
+  name: string;
+  bio: string;
+  pics: ImageData[];
 }
 
 const Profile = () => {
@@ -30,7 +39,7 @@ const Profile = () => {
   const UploadNotify = () => toast("Upload Successful!");
   const ppUpdateNotify = () => toast("Profile Picture Updated!");
   const picturedeleteNotify = () => toast("Picture Deleted!");
-  const [selectedPhoto, setSelectedPhoto] = useState();
+  const [selectedPhoto, setSelectedPhoto] = useState<ImageData>();
   const [viewPhoto, setViewPhoto] = useState<boolean>(false);
 
   const {
@@ -188,6 +197,7 @@ const Profile = () => {
                   setShowUpload(false);
                 }}
               />
+              {/* @ts-ignore */}
               <UploadDropzone endpoint="imageUploader" onBeforeUploadBegin={handleBeforeUploadBegin} onClientUploadComplete={handleClientUploadComplete} onUploadError={handleUploadError} />
               <IoIosClose
                 className="self-start h-6 w-6 cursor-pointer"
@@ -203,7 +213,7 @@ const Profile = () => {
       {viewPhoto && (
         <div className="bg-slate-300 rounded  fixed  m-auto top-0 bottom-0 right-0 left-0 flex flex-col justify-center items-center  border border-black ">
           {/* @ts-ignore */}
-          <img src={selectedPhoto.url} className="w-auto p-1  max-h-[85%] " />
+          <img src={selectedPhoto?.url} className="w-auto p-1  max-h-[85%] " />
           <div className="flex justify-center items-center gap-2 w-full  ">
             <MdDelete
               onClick={() => {
@@ -222,6 +232,7 @@ const Profile = () => {
               className=" cursor-pointer h-6 w-6 m-3 "
             />
           </div>
+          <h1>{`${selectedPhoto?.createdAt.slice(0, 10)}`}</h1>
         </div>
       )}
       <div className="columns-1 md:columns-3 lg:columns-4 lg:columns-5ry px-2 mt-10 ">

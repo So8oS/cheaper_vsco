@@ -8,6 +8,8 @@ import { IoIosCloseCircle } from "react-icons/io";
 
 interface ImageData {
   url: string;
+  id: string;
+  createdAt: string;
 }
 
 interface UserProfile {
@@ -21,7 +23,7 @@ const Profile = () => {
   const router = useRouter();
   const id = router.query.profile;
   const [user, setUser] = React.useState<UserProfile | null>(null); // Provide the type here
-  const [selectedPhoto, setSelectedPhoto] = useState();
+  const [selectedPhoto, setSelectedPhoto] = useState<ImageData>();
   const [viewPhoto, setViewPhoto] = useState<boolean>(false);
 
   const get = async () => {
@@ -60,7 +62,7 @@ const Profile = () => {
         <div className="bg-slate-300 rounded  fixed  m-auto top-0 bottom-0 right-0 left-0 flex flex-col justify-center items-center  border border-black ">
           {/* @ts-ignore */}
           <img src={selectedPhoto.url} className="w-auto p-1  max-h-[85%] " />
-          <div className="flex flex-col justify-center items-center gap-2 w-full  bg-slate-100">
+          <div className="flex flex-col justify-center items-center gap-2 w-full  ">
             <IoIosCloseCircle
               onClick={() => {
                 setViewPhoto(false);
@@ -68,6 +70,7 @@ const Profile = () => {
               className=" cursor-pointer h-6 w-6 m-3 "
             />
           </div>
+          <h1>{`${selectedPhoto?.createdAt.slice(0, 10)}`}</h1>
         </div>
       )}
 
@@ -82,7 +85,7 @@ const Profile = () => {
                   setViewPhoto(true);
                 }}
                 key={index}
-                className="w-80 p-2 mb-2"
+                className="w-80 p-2 mb-2 rounded-sm"
                 src={item.url}
               />
             ))
