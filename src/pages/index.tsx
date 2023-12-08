@@ -49,36 +49,40 @@ export default function Home() {
           <span className="loader"></span>
         </div>
       ) : (
-        users?.data?.map((user: User) => {
-          if (user.email == session?.user?.email) return null;
-          return (
-            <div key={user.id} className="flex flex-col self-start">
-              <Link href={`/${user.id}`} className="flex gap-2 items-center">
-                <img src={user?.image} alt="" className="w-12 rounded" />
-                <h1 className="font-semibold">{user.name}</h1>
-              </Link>
-              <div className={`flex justify-start lg:gap-10 gap-5 max-w-screen overflow-scroll md:overflow-auto py-4 `}>
-                {user?.pics
-                  ?.map((pic: { id: string; url: string }) => {
-                    return (
-                      <img
-                        onClick={() => {
-                          /* @ts-ignore */
-                          setSelectedPhoto(pic);
-                          setViewPhoto(true);
-                        }}
-                        key={pic.id}
-                        src={pic.url}
-                        alt="pic"
-                        className="w-72 h-60 md:w-60  object-cover cursor-pointer rounded-sm "
-                      />
-                    );
-                  })
-                  .slice(0, 4)}
+        users?.data
+          ?.map((user: User) => {
+            if (user.email == session?.user?.email) return null;
+            if (user.pics.length < 2) return null;
+            return (
+              <div key={user.id} className="flex flex-col self-start">
+                <Link href={`/${user.id}`} className="flex gap-2 items-center">
+                  <img src={user?.image} alt="" className="w-12 rounded" />
+                  <h1 className="font-semibold">{user.name}</h1>
+                </Link>
+                <div className={`flex justify-start lg:gap-10 gap-5 max-w-screen overflow-scroll md:overflow-auto py-4 `}>
+                  {user?.pics
+                    ?.map((pic: { id: string; url: string }) => {
+                      return (
+                        <img
+                          onClick={() => {
+                            /* @ts-ignore */
+                            setSelectedPhoto(pic);
+                            setViewPhoto(true);
+                          }}
+                          key={pic.id}
+                          src={pic.url}
+                          alt="pic"
+                          className="w-72 h-60 md:w-60  object-cover cursor-pointer rounded-sm "
+                        />
+                      );
+                    })
+                    .slice(0, 4)}
+                </div>
               </div>
-            </div>
-          );
-        })
+            );
+          })
+          .reverse()
+          .slice(0, 5)
       )}
     </div>
   );
