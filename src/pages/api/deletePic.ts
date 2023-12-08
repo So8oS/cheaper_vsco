@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         id: picId,
       },
     });
-    return res.status(200).json("Deleted Successfully");
+    return res.status(200).json({ pic });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal server error" });
