@@ -46,3 +46,8 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+a,
+img {
+  -webkit-tap-highlight-color: transparent;
+}
