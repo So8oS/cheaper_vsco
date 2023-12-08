@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import prismadb from "../../../lib/prismadb";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { picId } = req.body;
@@ -11,7 +12,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         id: picId,
       },
     });
-    return res.status(200).json({ pic });
+    return res.status(200).json("Deleted");
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal server error" });
