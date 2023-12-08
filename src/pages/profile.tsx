@@ -77,9 +77,8 @@ const Profile = () => {
     setValue("newBio", user?.data?.bio || "");
     setIsEditing(!isEditing);
   };
-  {
-    /* @ts-ignore */
-  }
+
+  /* @ts-ignore */
   const handleDelete = async (id) => {
     const userConfirmed = window.confirm("Are you sure you want to delete this image?");
 
@@ -205,9 +204,8 @@ const Profile = () => {
           <div className="flex flex-col justify-center items-center gap-2 w-full  bg-slate-100">
             <button
               onClick={() => {
-                {
-                  /* @ts-ignore */
-                }
+                /* @ts-ignore */
+
                 handleDelete(selectedPhoto.id);
                 setViewPhoto(false);
               }}
@@ -230,9 +228,7 @@ const Profile = () => {
             .map((item: ImageData, index: number) => (
               <img
                 onClick={() => {
-                  {
-                    /* @ts-ignore */
-                  }
+                  /* @ts-ignore */
                   setSelectedPhoto(item);
                   setViewPhoto(true);
                 }}
