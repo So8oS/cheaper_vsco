@@ -81,6 +81,7 @@ const Profile = () => {
   const updateInfo = async (data: FormData) => {
     await axios.post("/api/infoUpdate", { newName: data.newName, newBio: data.newBio, userId: user.data.id });
     setIsEditing(false);
+    await mutate("/api/user");
   };
 
   const handleEdit = () => {
