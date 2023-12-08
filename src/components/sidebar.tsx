@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FaSignOutAlt } from "react-icons/fa";
 import { signOut } from "next-auth/react";
 import { useSession } from "next-auth/react";
+import { TfiMenu } from "react-icons/tfi";
 
 const Sidebar = () => {
   const { data: session } = useSession();
@@ -28,14 +29,21 @@ const Sidebar = () => {
           <span>CVSCO</span>
         </Link>
       </div>
-      <h1
+      <TfiMenu
+        onClick={() => {
+          setOpen(!open);
+        }}
+        className="w-6 h-6 lg:hidden cursor-pointer"
+      />
+
+      {/* <h1
         className="text-xl font-bold lg:hidden cursor-pointer"
         onClick={() => {
           setOpen(!open);
         }}
       >
         --
-      </h1>
+      </h1> */}
 
       <div
         className={` ${open && "hidden "}   lg:flex lg:flex-col h-full gap-4 lg:gap-0 lg:items-center  lg:mt-10

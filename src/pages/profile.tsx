@@ -9,6 +9,7 @@ import { mutate } from "swr";
 import { IoIosClose } from "react-icons/io";
 import { MdOutlineEdit } from "react-icons/md";
 import { useForm } from "react-hook-form";
+import { IoIosCloseCircle } from "react-icons/io";
 
 interface ImageData {
   url: string;
@@ -27,6 +28,8 @@ const Profile = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
   const UploadNotify = () => toast("Upload Successful!");
   const ppUpdateNotify = () => toast("Profile Picture Updated!");
+  const [selectedPhoto, setSelectedPhoto] = useState();
+  const [viewPhoto, setViewPhoto] = useState<boolean>(false);
 
   const {
     register,
@@ -61,6 +64,7 @@ const Profile = () => {
 
   const updateProfilePic = async (newPic: string) => {
     await axios.post("/api/imageUpdate", { newImage: newPic, userId: user.data.id });
+    ppUpdateNotify();
   };
 
   const updateInfo = async (data: FormData) => {
@@ -72,6 +76,19 @@ const Profile = () => {
     setValue("newName", user?.data?.name || "");
     setValue("newBio", user?.data?.bio || "");
     setIsEditing(!isEditing);
+  };
+  {
+    /* @ts-ignore */
+  }
+  const handleDelete = async (id) => {
+    const userConfirmed = window.confirm("Are you sure you want to delete this image?");
+
+    if (userConfirmed) {
+      await axios.post("/api/deletePic", { picId: id });
+      await mutate("/api/user");
+    } else {
+      return;
+    }
   };
 
   if (!user.data) {
@@ -181,8 +198,50 @@ const Profile = () => {
         )}
       </div>
 
+      {viewPhoto && (
+        <div className="bg-slate-300 rounded  fixed  m-auto top-0 bottom-0 right-0 left-0 flex flex-col justify-center items-center  border border-black ">
+          {/* @ts-ignore */}
+          <img src={selectedPhoto.url} className="w-auto p-1  max-h-[85%] " />
+          <div className="flex flex-col justify-center items-center gap-2 w-full  bg-slate-100">
+            <button
+              onClick={() => {
+                {
+                  /* @ts-ignore */
+                }
+                handleDelete(selectedPhoto.id);
+                setViewPhoto(false);
+              }}
+              className="bg-red-600 rounded text-white px-2 py-1 mt-5"
+            >
+              Delete
+            </button>
+            <IoIosCloseCircle
+              onClick={() => {
+                setViewPhoto(false);
+              }}
+              className=" cursor-pointer h-6 w-6 m-3 "
+            />
+          </div>
+        </div>
+      )}
       <div className="columns-1 md:columns-3 lg:columns-4 lg:columns-5ry px-2 mt-10 ">
-        {user && user?.data?.pics.map((item: ImageData, index: number) => <img key={index} className="w-80 p-2 mb-2" src={item.url} />).reverse()}
+        {user &&
+          user?.data?.pics
+            .map((item: ImageData, index: number) => (
+              <img
+                onClick={() => {
+                  {
+                    /* @ts-ignore */
+                  }
+                  setSelectedPhoto(item);
+                  setViewPhoto(true);
+                }}
+                key={index}
+                className="w-80 p-2 mb-2 cursor-pointer rounded-sm "
+                src={item.url}
+              />
+            ))
+            .reverse()}
       </div>
     </div>
   );
