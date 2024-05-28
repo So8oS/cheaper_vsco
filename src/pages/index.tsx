@@ -1,10 +1,19 @@
 /* eslint-disable jsx-a11y/alt-text */
 /* eslint-disable @next/next/no-img-element */
 import useUsers from "../../lib/useUsers";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { IoIosCloseCircle } from "react-icons/io";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+
 
 interface User {
   id: string;
@@ -24,6 +33,11 @@ export default function Home() {
   const [selectedPhoto, setSelectedPhoto] = useState<ImageData>();
   const [viewPhoto, setViewPhoto] = useState<boolean>(false);
   const [sliceCount, setSliceCount] = useState<number>(2);
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(true);
+  }, []);
   return (
     <div className="flex flex-col justify-center items-center p-2">
       <h1 className="text-5xl font-bold">CVSCO</h1>
@@ -95,6 +109,18 @@ export default function Home() {
           Load more
         </button>
       )}
+        <Dialog open={open} onOpenChange={setOpen}>
+  {/* <DialogTrigger>Open</DialogTrigger> */}
+  <DialogContent>
+    <DialogHeader>
+      <DialogTitle className="text-5xl flex justify-center items-center">Site under maintenance </DialogTitle>
+      {/* <DialogDescription>
+        This action cannot be undone. This will permanently delete your account
+        and remove your data from our servers.
+      </DialogDescription> */}
+    </DialogHeader>
+  </DialogContent>
+</Dialog>
     </div>
   );
 }
