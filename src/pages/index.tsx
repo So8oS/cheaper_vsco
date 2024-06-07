@@ -109,18 +109,15 @@ export default function Home() {
           Load more
         </button>
       )}
-        <Dialog open={open} onOpenChange={setOpen}>
-  {/* <DialogTrigger>Open</DialogTrigger> */}
+        {/* <Dialog open={open} onOpenChange={setOpen}>
+  <DialogTrigger>Open</DialogTrigger>
   <DialogContent>
     <DialogHeader>
       <DialogTitle className="text-5xl flex justify-center items-center">Site under maintenance </DialogTitle>
-      {/* <DialogDescription>
-        This action cannot be undone. This will permanently delete your account
-        and remove your data from our servers.
-      </DialogDescription> */}
+     
     </DialogHeader>
   </DialogContent>
-</Dialog>
+</Dialog> */}
     </div>
   );
 }
